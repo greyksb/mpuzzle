@@ -73,22 +73,45 @@ public class Test {
 
     //
     public void printTest() {
-        System.out.println("  "+this.multFirst.makeStringView());
-        System.out.println("   " + this.multSecond.makeStringView());
-        System.out.println("-----");
-        System.out.println(" " + this.summFirst.makeStringView());
-        System.out.println(this.summSecond.makeStringView());
-        System.out.println("-----");
-        System.out.println(this.result.makeStringView());
+        System.out.println("    " + this.multFirst.makeColorStringView());
+       // System.out.println("\n");
+        System.out.println("   x  " + this.multSecond.makeColorStringView());
+        System.out.println("  -------");
+        System.out.println("  " + this.summFirst.makeColorStringView());
+        //System.out.println("\n");
+        System.out.println(this.summSecond.makeColorStringView());
+        System.out.println("---------");
+        System.out.println(this.result.makeColorStringView());
     }
-    public void printAnswer() {
-        System.out.println("  "+this.multFirst.makeAnswerStringView());
-        System.out.println("   " + this.multSecond.makeAnswerStringView());
-        System.out.println("-----");
-        System.out.println(" " + this.summFirst.makeAnswerStringView());
-        System.out.println(this.summSecond.makeAnswerStringView());
-        System.out.println("-----");
-        System.out.println(this.result.makeAnswerStringView());
+
+    public boolean charIsPresent(char ch) {
+        boolean out = false ;
+        if (!(out = multFirst.charIsPresent(ch)) )
+            if ( !(out = multSecond.charIsPresent(ch)) )
+                if ( !(out = summFirst.charIsPresent(ch)) )
+                    if ( !(out = summSecond.charIsPresent(ch)) )
+                        out = result.charIsPresent(ch) ;
+
+        return out ;
     }
+    public boolean charIsUnsolved(char ch) {
+        boolean out = false ;
+        if (!(out = multFirst.charIsUnsolved(ch)) )
+            if ( !(out = multSecond.charIsUnsolved(ch)) )
+                if ( !(out = summFirst.charIsUnsolved(ch)) )
+                    if ( !(out = summSecond.charIsUnsolved(ch)) )
+                        out = result.charIsUnsolved(ch) ;
+
+        return out ;
+    }
+
+    public void changeCellStatus(int val) {
+        multFirst.changeCellsStatus(val);
+        multSecond.changeCellsStatus(val);
+        summFirst.changeCellsStatus(val);
+        summSecond.changeCellsStatus(val);
+        result.changeCellsStatus(val);
+    }
+
 
 }

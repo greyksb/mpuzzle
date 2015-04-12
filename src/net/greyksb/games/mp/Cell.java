@@ -1,5 +1,7 @@
 package net.greyksb.games.mp;
 
+import net.greyksb.utils.cli.CliColors;
+
 /**
  * Created by greyksb(ksb) on 08.04.2015.
  * Разряд, ячейка...  Составляющая числа...
@@ -46,4 +48,31 @@ public class Cell {
     boolean attemptValue(int test) {
         return (test==this.value) ; //? true : false ;
     }
+
+    public String getCell() {
+        String tmpBuff = "" ;
+        if (status == CellStatus.UNSOLVED)
+            tmpBuff += Character.toString(getCode()) ;
+        else
+            tmpBuff += Integer.toString(getValue()) ;
+        return tmpBuff ;
+    }
+
+    public String getColorCell() {
+        String tmpBuff = "";
+        if (status == CellStatus.UNSOLVED) {
+            tmpBuff += CliColors.BOLD.colorString() ;
+            tmpBuff += CliColors.FC_RED.colorString() ;
+            tmpBuff += Character.toString(getCode());
+            tmpBuff += CliColors.DEFAULT.colorString() ;
+        }
+        else {
+            tmpBuff += CliColors.FC_GREEN.colorString() ;
+            tmpBuff += Integer.toString(getValue());
+            tmpBuff += CliColors.DEFAULT.colorString() ;
+        }
+        return tmpBuff ;
+    }
+
 }
+

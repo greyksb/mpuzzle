@@ -23,23 +23,34 @@ public class Numeric {
 
     }
 
-    public String makeStringView() {
+    public String makeColorStringView() {
         String tmpStr = "" ;
-        for (int i=0; i<cell.length; i++ ) {
-            if (cell[i].getStatus() == net.greyksb.games.mp.CellStatus.UNSOLVED)
-                tmpStr += Character.toString(cell[i].getCode()) ;
-            else
-                tmpStr += Integer.toString(cell[i].getValue()) ;
-        }
+        for (int i=0; i<cell.length; i++ )
+            tmpStr += (cell[i].getColorCell()+" ") ;
         return tmpStr ;
     }
 
-    public String makeAnswerStringView() {
+    public String makeStringView() {
         String tmpStr = "" ;
-        for (int i=0; i<cell.length; i++ ) {
-                tmpStr += Integer.toString(cell[i].getValue()) ;
-        }
+        for (int i=0; i<cell.length; i++ )
+            tmpStr += (cell[i].getCell()+" ") ;
         return tmpStr ;
     }
+    public boolean charIsPresent(char c) {
+        boolean out = false ;
+        for (int i = 0; i < cell.length ; i++) {
+            if (cell[i].getCode() == c ) out = true ;
+        }
+        return out ;
+    }
+
+    public boolean charIsUnsolved(char c) {
+        boolean out = false ;
+        for (int i = 0; i < cell.length ; i++) {
+            if (cell[i].getCode() == c && cell[i].getStatus() == CellStatus.UNSOLVED ) out = true ;
+        }
+        return out ;
+    }
+
 
 }
