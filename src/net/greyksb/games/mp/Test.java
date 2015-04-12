@@ -24,7 +24,7 @@ public class Test {
             tmpInt = Character.getNumericValue(tmpbuff.charAt(i)) ;
             n.cell[i].setValue(tmpInt);
             n.cell[i].setCode(enigma.getCode(tmpInt));
-            n.cell[i].setStatus(Cell.CELL_STATUS.UNSOLVED);
+            n.cell[i].setStatus(CellStatus.UNSOLVED);
         }
 
     }

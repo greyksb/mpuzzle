@@ -17,10 +17,8 @@ public class Numeric {
 
     // изменить статус тех ячеек, значение которых равно value
     public void changeCellsStatus(int value) {
-        for (int i=0; i<this.cell.length; i++) {
-            if (this.cell[i].getValue() == value) {
-                this.cell[i].setStatus(net.greyksb.games.mp.Cell.CELL_STATUS.SOLVED);
-            }
+        for (Cell aCell : this.cell) {
+            if (aCell.getValue() == value) aCell.setStatus(CellStatus.SOLVED);
         }
 
     }
@@ -28,7 +26,7 @@ public class Numeric {
     public String makeStringView() {
         String tmpStr = "" ;
         for (int i=0; i<cell.length; i++ ) {
-            if (cell[i].getStatus() == net.greyksb.games.mp.Cell.CELL_STATUS.UNSOLVED)
+            if (cell[i].getStatus() == net.greyksb.games.mp.CellStatus.UNSOLVED)
                 tmpStr += Character.toString(cell[i].getCode()) ;
             else
                 tmpStr += Integer.toString(cell[i].getValue()) ;

@@ -6,23 +6,19 @@ package net.greyksb.games.mp;
  */
 public class Cell {
     // class fild
-    public enum CELL_STATUS {UNSOLVED, CALCULATED, SOLVED}
+    //public enum CELL_STATUS {UNSOLVED, CALCULATED, SOLVED}
 
     //fields
     private int value ;
     private char code ;
-    private CELL_STATUS status ;
+    private CellStatus status ;
 
     // constructors and methods
     public Cell(){
         this.value = 0 ;
         this.code = 'A' ;
-        this.status = CELL_STATUS.UNSOLVED ;
+        this.status = CellStatus.UNSOLVED ;
     }
-    public Cell(int v) {
-        this.value = v ;
-    }
-
     public int getValue() {
         return value;
     }
@@ -39,11 +35,11 @@ public class Cell {
         this.code = code;
     }
 
-    public CELL_STATUS getStatus() {
+    public CellStatus getStatus() {
         return status;
     }
 
-    public void setStatus(CELL_STATUS status) {
+    public void setStatus(CellStatus status) {
         this.status = status;
     }
 
