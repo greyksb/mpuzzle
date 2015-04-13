@@ -64,7 +64,7 @@ public class Main {
                 if (tst.isSolvedVavue(inputInt)) continue;
 
                    if (inputChar == enigma.getCode(inputInt)) {
-                       last_line = "Yes! " + inputChar + " is " + inputInt + " Select next character:";
+                       last_line = cli_col.getColorString(CliColors.FC_YELLOW)+"Yes! " + inputChar + " is " + inputInt +cli_col.getColorString(CliColors.DEFAULT)+ " Select next character:";
                        tst.changeCellStatus(inputInt);
                        tst.setFlagSolvedValue(inputInt);
                        //sizOfTest -= 1 ;
@@ -73,6 +73,7 @@ public class Main {
                            // new game
                            numberGames += 1 ;
                            numberOfAllErrors += numberErrors ;
+                           numberErrors = 0 ;
                            avgErrors = numberOfAllErrors / numberGames ;
                            tst.newTest();
                            //sizOfTest = tst.getUnsolvedValue() ;
