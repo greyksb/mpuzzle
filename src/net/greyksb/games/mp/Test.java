@@ -9,6 +9,10 @@ import java.util.Random;
  * Задание Multiplicate Puzzle
  */
 public class Test {
+
+    int[] solvedValue = new int[10] ;
+    // 1 = unsolved  0 = solved -1 = not present
+
     Numeric multFirst = new Numeric(3) ;
     Numeric multSecond = new Numeric(2) ;
     Numeric summFirst = new Numeric(4) ;
@@ -28,6 +32,23 @@ public class Test {
         }
 
     }
+    public void setFlagSolvedValue(int idx) {
+        solvedValue[idx] = 0 ;
+    }
+    public  void setFlagUnsolvedValue(int idx) {
+        solvedValue[idx] = 1 ;
+    }
+
+    public int getUnsolvedValue() {
+        int out = 0 ;
+        for (int i = 0; i < solvedValue.length; i++) {
+            if (solvedValue[i] == 1) out += 1 ;
+        }
+        return out ;
+    }
+    public boolean isSolvedVavue(int idx) {
+        return (solvedValue[idx] == 0) ;
+    }
 
     public void newTest() {
         int m1, m2, s1, s2, r ;
@@ -35,6 +56,10 @@ public class Test {
         String tmpStr ;
         char tmpCh ;
         int tmpInt ;
+
+        for (int i = 0; i < solvedValue.length ; i++) {
+            solvedValue[i] = -1 ;
+        }
 
         while (true) {
             m1 = 100+rnd.nextInt(900) ;             // Трехзначный первый множитель
@@ -69,6 +94,25 @@ public class Test {
         setNuneric(this.summFirst, s1);
         setNuneric(this.summSecond, s2);
         setNuneric(this.result, r);
+
+        for (int i = 0; i < multFirst.cell.length ; i++) {
+            this.setFlagUnsolvedValue(multFirst.cell[i].getValue());
+        }
+        for (int i = 0; i < multSecond.cell.length ; i++) {
+            this.setFlagUnsolvedValue(multSecond.cell[i].getValue());
+        }
+        for (int i = 0; i < summFirst.cell.length ; i++) {
+            this.setFlagUnsolvedValue(summFirst.cell[i].getValue());
+        }
+        for (int i = 0; i < summSecond.cell.length ; i++) {
+            this.setFlagUnsolvedValue(summSecond.cell[i].getValue());
+        }
+        for (int i = 0; i < result.cell.length ; i++) {
+            this.setFlagUnsolvedValue(result.cell[i].getValue());
+        }
+
+
+
     }
 
     //

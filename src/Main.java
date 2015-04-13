@@ -1,31 +1,37 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import net.greyksb.games.mp.*;
-//import net.greyksb.utils.*;
 import net.greyksb.utils.cli.CliColors;
-
-import java.util.Random;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+        int  numberOfAllErrors = 0 ;
         int numberErrors = 0 ;
         int numberGames = 0 ;
         double avgErrors = 0.00 ;
         boolean read_char_mode = true ;
-        boolean last_line_mode = true ;
-        String last_line = "Your try:" ;
+        //boolean last_line_mode = true ;
+        String last_line = "Type q for exit or select character:" ;
         char inputChar = 'q' ;
         int inputInt = 0 ;
+        String inputStr = "" ;
+
         Enigma enigma = new Enigma() ;
 
         CliColors cli_col = CliColors.DEFAULT;
-        Scanner sc = new Scanner(System.in);
+        //Scanner sc = new Scanner(System.in);
+
+        BufferedReader brd = new BufferedReader(new InputStreamReader(System.in)) ;
+        //brd.read()
 
         Test tst = new Test();
         tst.newTest();
-        boolean quit_flag = false ;
-        while (!quit_flag) {
+        //sizOfTest = tst.getUnsolvedValue() ;
+
+        while (true) {
             cli_col.clearConsole();
             System.out.println("Number of errors (this game):\t" + cli_col.getColorString(CliColors.FC_YELLOW) + numberErrors);
             cli_col.setDefaultColor();
@@ -35,46 +41,52 @@ public class Main {
             cli_col.setDefaultColor();
             System.out.println("\nTest for You:\n");
             tst.printTest();
-
-            while (last_line_mode) {
-                System.out.print("\r"+last_line);
-                if (read_char_mode) {
-                    if (sc.hasNext()) {
-                        inputChar = sc.nextLine().toUpperCase().charAt(0) ;
-                        if (isEnigmaChar(inputChar)) {
-                            if (tst.charIsPresent(inputChar) && tst.charIsUnsolved(inputChar)) {
-                                last_line = "Your try: "+inputChar+" = ?" ;
-                                read_char_mode = false ;
-                            }
-                            else
-                                last_line = "Your try:" ;
+            System.out.println("");
+            System.out.print(last_line);
+            inputStr = brd.readLine() ;
+            if (inputStr.length() != 1) continue;
+            if (read_char_mode) {
+                inputChar = inputStr.toUpperCase().charAt(0) ;
+                if (inputChar == 'Q') break ;
+                  if (isEnigmaChar(inputChar))
+                        if (tst.charIsPresent(inputChar) && tst.charIsUnsolved(inputChar)) {
+                            last_line = "Your try: "+inputChar+" = " ;
+                            read_char_mode = false ;
                         }
-                        else {
-                            if ( inputChar == 'q' || inputChar == 'Q') {
-                                last_line_mode = false;
-                                quit_flag = true ;
-                            }
-                        }
-                    }
-                }
-                else {
-                    inputInt = sc.nextInt() ;
-                    if (inputInt>=0 && inputInt<=9) {
-                        if ( inputChar == enigma.getCode(inputInt)) {
-                            last_line = "Yes!!! "+ inputChar + " is " +"Your next try:" ;
-                            tst.changeCellStatus(inputInt);
-                            // уменьшить на 1 количество неразгаданных ячеек
-                            last_line_mode = false ;
-                        }
-                    }
-                    else {
-                        last_line = "Your try:" ;
-                    }
-                    read_char_mode = true ;
-                }
             }
+            else {
+                try {
+                    inputInt = Integer.valueOf(inputStr);
+                }
+                catch (NumberFormatException e) {
+                }
 
+                if (tst.isSolvedVavue(inputInt)) continue;
+
+                   if (inputChar == enigma.getCode(inputInt)) {
+                       last_line = "Yes! " + inputChar + " is " + inputInt + " Select next character:";
+                       tst.changeCellStatus(inputInt);
+                       tst.setFlagSolvedValue(inputInt);
+                       //sizOfTest -= 1 ;
+                       read_char_mode = true ;
+                       if ( tst.getUnsolvedValue() == 0) {
+                           // new game
+                           numberGames += 1 ;
+                           numberOfAllErrors += numberErrors ;
+                           avgErrors = numberOfAllErrors / numberGames ;
+                           tst.newTest();
+                           //sizOfTest = tst.getUnsolvedValue() ;
+                           last_line = "New game...Type q for exit or select character:" ;
+                       }
+                   }
+                   else {
+                       last_line = "Sorry... Type q for exit or select character:" ;
+                       numberErrors += 1 ;
+                       read_char_mode = true ;
+                   }
+            }
         }
+        cli_col.clearConsole();
     }
 
     public static boolean isEnigmaChar(char ch) {
