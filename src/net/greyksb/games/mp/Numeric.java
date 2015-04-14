@@ -17,31 +17,40 @@ public class Numeric {
 
     // изменить статус тех ячеек, значение которых равно value
     public void changeCellsStatus(int value) {
-        for (int i=0; i<this.cell.length; i++) {
-            if (this.cell[i].getValue() == value) {
-                this.cell[i].setStatus(net.greyksb.games.mp.Cell.CELL_STATUS.SOLVED);
-            }
+        for (Cell aCell : this.cell) {
+            if (aCell.getValue() == value) aCell.setStatus(CellStatus.SOLVED);
         }
 
+    }
+
+    public String makeColorStringView() {
+        String tmpStr = "" ;
+        for (int i=0; i<cell.length; i++ )
+            tmpStr += (cell[i].getColorCell()+" ") ;
+        return tmpStr ;
     }
 
     public String makeStringView() {
         String tmpStr = "" ;
-        for (int i=0; i<cell.length; i++ ) {
-            if (cell[i].getStatus() == net.greyksb.games.mp.Cell.CELL_STATUS.UNSOLVED)
-                tmpStr += Character.toString(cell[i].getCode()) ;
-            else
-                tmpStr += Integer.toString(cell[i].getValue()) ;
-        }
+        for (int i=0; i<cell.length; i++ )
+            tmpStr += (cell[i].getCell()+" ") ;
         return tmpStr ;
+    }
+    public boolean charIsPresent(char c) {
+        boolean out = false ;
+        for (int i = 0; i < cell.length ; i++) {
+            if (cell[i].getCode() == c ) out = true ;
+        }
+        return out ;
     }
 
-    public String makeAnswerStringView() {
-        String tmpStr = "" ;
-        for (int i=0; i<cell.length; i++ ) {
-                tmpStr += Integer.toString(cell[i].getValue()) ;
+    public boolean charIsUnsolved(char c) {
+        boolean out = false ;
+        for (int i = 0; i < cell.length ; i++) {
+            if (cell[i].getCode() == c && cell[i].getStatus() == CellStatus.UNSOLVED ) out = true ;
         }
-        return tmpStr ;
+        return out ;
     }
+
 
 }

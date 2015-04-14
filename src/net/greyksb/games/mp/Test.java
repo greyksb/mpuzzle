@@ -9,6 +9,10 @@ import java.util.Random;
  * Задание Multiplicate Puzzle
  */
 public class Test {
+
+    int[] solvedValue = new int[10] ;
+    // 1 = unsolved  0 = solved -1 = not present
+
     Numeric multFirst = new Numeric(3) ;
     Numeric multSecond = new Numeric(2) ;
     Numeric summFirst = new Numeric(4) ;
@@ -24,9 +28,26 @@ public class Test {
             tmpInt = Character.getNumericValue(tmpbuff.charAt(i)) ;
             n.cell[i].setValue(tmpInt);
             n.cell[i].setCode(enigma.getCode(tmpInt));
-            n.cell[i].setStatus(Cell.CELL_STATUS.UNSOLVED);
+            n.cell[i].setStatus(CellStatus.UNSOLVED);
         }
 
+    }
+    public void setFlagSolvedValue(int idx) {
+        solvedValue[idx] = 0 ;
+    }
+    public  void setFlagUnsolvedValue(int idx) {
+        solvedValue[idx] = 1 ;
+    }
+
+    public int getUnsolvedValue() {
+        int out = 0 ;
+        for (int i = 0; i < solvedValue.length; i++) {
+            if (solvedValue[i] == 1) out += 1 ;
+        }
+        return out ;
+    }
+    public boolean isSolvedVavue(int idx) {
+        return (solvedValue[idx] == 0) ;
     }
 
     public void newTest() {
@@ -35,6 +56,10 @@ public class Test {
         String tmpStr ;
         char tmpCh ;
         int tmpInt ;
+
+        for (int i = 0; i < solvedValue.length ; i++) {
+            solvedValue[i] = -1 ;
+        }
 
         while (true) {
             m1 = 100+rnd.nextInt(900) ;             // Трехзначный первый множитель
@@ -69,26 +94,68 @@ public class Test {
         setNuneric(this.summFirst, s1);
         setNuneric(this.summSecond, s2);
         setNuneric(this.result, r);
+
+        for (int i = 0; i < multFirst.cell.length ; i++) {
+            this.setFlagUnsolvedValue(multFirst.cell[i].getValue());
+        }
+        for (int i = 0; i < multSecond.cell.length ; i++) {
+            this.setFlagUnsolvedValue(multSecond.cell[i].getValue());
+        }
+        for (int i = 0; i < summFirst.cell.length ; i++) {
+            this.setFlagUnsolvedValue(summFirst.cell[i].getValue());
+        }
+        for (int i = 0; i < summSecond.cell.length ; i++) {
+            this.setFlagUnsolvedValue(summSecond.cell[i].getValue());
+        }
+        for (int i = 0; i < result.cell.length ; i++) {
+            this.setFlagUnsolvedValue(result.cell[i].getValue());
+        }
+
+
+
     }
 
     //
     public void printTest() {
-        System.out.println("  "+this.multFirst.makeStringView());
-        System.out.println("   " + this.multSecond.makeStringView());
-        System.out.println("-----");
-        System.out.println(" " + this.summFirst.makeStringView());
-        System.out.println(this.summSecond.makeStringView());
-        System.out.println("-----");
-        System.out.println(this.result.makeStringView());
+        System.out.println("    " + this.multFirst.makeColorStringView());
+       // System.out.println("\n");
+        System.out.println("   x  " + this.multSecond.makeColorStringView());
+        System.out.println("  -------");
+        System.out.println("  " + this.summFirst.makeColorStringView());
+        //System.out.println("\n");
+        System.out.println(this.summSecond.makeColorStringView());
+        System.out.println("---------");
+        System.out.println(this.result.makeColorStringView());
     }
-    public void printAnswer() {
-        System.out.println("  "+this.multFirst.makeAnswerStringView());
-        System.out.println("   " + this.multSecond.makeAnswerStringView());
-        System.out.println("-----");
-        System.out.println(" " + this.summFirst.makeAnswerStringView());
-        System.out.println(this.summSecond.makeAnswerStringView());
-        System.out.println("-----");
-        System.out.println(this.result.makeAnswerStringView());
+
+    public boolean charIsPresent(char ch) {
+        boolean out = false ;
+        if (!(out = multFirst.charIsPresent(ch)) )
+            if ( !(out = multSecond.charIsPresent(ch)) )
+                if ( !(out = summFirst.charIsPresent(ch)) )
+                    if ( !(out = summSecond.charIsPresent(ch)) )
+                        out = result.charIsPresent(ch) ;
+
+        return out ;
     }
+    public boolean charIsUnsolved(char ch) {
+        boolean out = false ;
+        if (!(out = multFirst.charIsUnsolved(ch)) )
+            if ( !(out = multSecond.charIsUnsolved(ch)) )
+                if ( !(out = summFirst.charIsUnsolved(ch)) )
+                    if ( !(out = summSecond.charIsUnsolved(ch)) )
+                        out = result.charIsUnsolved(ch) ;
+
+        return out ;
+    }
+
+    public void changeCellStatus(int val) {
+        multFirst.changeCellsStatus(val);
+        multSecond.changeCellsStatus(val);
+        summFirst.changeCellsStatus(val);
+        summSecond.changeCellsStatus(val);
+        result.changeCellsStatus(val);
+    }
+
 
 }
