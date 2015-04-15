@@ -11,7 +11,10 @@ import java.util.Random;
 public class Test {
 
     int[] solvedValue = new int[10] ;
-    // 1 = unsolved  0 = solved -1 = not present
+    // 1 = unsolved;  0 = solved; -1 = not present
+    
+    public Enigma enigma = new Enigma();
+ 
 
     Numeric multFirst = new Numeric(3) ;
     Numeric multSecond = new Numeric(2) ;
@@ -21,7 +24,7 @@ public class Test {
 
     // methods
     private void setNuneric(Numeric n, int value) {
-        Enigma enigma = new Enigma() ;
+        //Enigma enigma = new Enigma() ;
         String tmpbuff = Integer.toString(value) ;
         int tmpInt ;
         for (int i=0; i<n.cell.length; i++) {
@@ -85,7 +88,6 @@ public class Test {
         }
 
         // для нового задания формируем новый шифр
-        Enigma enigma = new Enigma();
         enigma.shuffleCipher();
 
         // формируем составляющие "столбика" умножения

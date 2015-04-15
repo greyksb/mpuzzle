@@ -1,7 +1,11 @@
 package net.greyksb.utils.cli;
 
 /**
- * Created by user8 on 12.04.2015.
+ * Created by greyksb(ksb) on 12.04.2015.
+ * цветной вывод с помощью esc-последовательностей
+ * работать будет только в xterm
+ * 
+ * 
  */
 public enum CliColors {
     CLEAR("\u001b[2J"),
@@ -20,21 +24,32 @@ public enum CliColors {
 
     private String currentColor ;
 
+    // Constructors
+    
+    CliColors() {
+        this.currentColor = "\033[0m";
+    }
+
     CliColors(String s) {
         this.currentColor = s ;
     }
+    
+    //private metods
 
-    public String colorString() {
+    private String colorString() {
         return currentColor ;
     }
+    
+    // public methods
 
-    public String getColorString(CliColors clic) {
+    public static String getColorString(CliColors clic) {
         return clic.colorString() ;
     }
-
-    public void setCliColor(String color_str) {
-        System.out.print(color_str);
+    
+    public void setCliColor(CliColors clic) {
+        System.out.print(getColorString(clic));
     }
+    
 
     public void setDefaultColor() {
         System.out.print(this.getColorString(DEFAULT));

@@ -19,7 +19,7 @@ public class Main {
         int inputInt = 0 ;
         String inputStr = "" ;
 
-        Enigma enigma = new Enigma() ;
+        //Enigma enigma = new Enigma() ;
 
         CliColors cli_col = CliColors.DEFAULT;
         //Scanner sc = new Scanner(System.in);
@@ -63,7 +63,7 @@ public class Main {
 
                 if (tst.isSolvedVavue(inputInt)) continue;
 
-                   if (inputChar == enigma.getCode(inputInt)) {
+                   if (inputChar == tst.enigma.getCode(inputInt)) {
                        last_line = cli_col.getColorString(CliColors.FC_YELLOW)+"Yes! " + inputChar + " is " + inputInt +cli_col.getColorString(CliColors.DEFAULT)+ " Select next character:";
                        tst.changeCellStatus(inputInt);
                        tst.setFlagSolvedValue(inputInt);

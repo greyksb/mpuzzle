@@ -61,15 +61,15 @@ public class Cell {
     public String getColorCell() {
         String tmpBuff = "";
         if (status == CellStatus.UNSOLVED) {
-            tmpBuff += CliColors.BOLD.colorString() ;
-            tmpBuff += CliColors.FC_RED.colorString() ;
+            tmpBuff += CliColors.getColorString(CliColors.BOLD) ;
+            tmpBuff += CliColors.getColorString(CliColors.FC_RED) ;
             tmpBuff += Character.toString(getCode());
-            tmpBuff += CliColors.DEFAULT.colorString() ;
+            tmpBuff += CliColors.getColorString(CliColors.DEFAULT) ;
         }
         else {
-            tmpBuff += CliColors.FC_GREEN.colorString() ;
+            tmpBuff += CliColors.getColorString(CliColors.FC_GREEN) ;
             tmpBuff += Integer.toString(getValue());
-            tmpBuff += CliColors.DEFAULT.colorString() ;
+            tmpBuff += CliColors.getColorString(CliColors.DEFAULT) ;
         }
         return tmpBuff ;
     }
