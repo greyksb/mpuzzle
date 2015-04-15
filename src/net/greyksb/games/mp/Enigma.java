@@ -1,5 +1,5 @@
 package net.greyksb.games.mp;
-import net.greyksb.games.mp.*;
+//import net.greyksb.games.mp.*;
 
 import java.util.Random;
 
@@ -26,8 +26,11 @@ public class Enigma {
     }
 
     public char getCode(int idx) {
-        //idx= (idx<0 || idx>9) ? 0 : idx ;     // избыточная проверка для целей генеральной задачи
         return Enigma.cipher[idx] ;
+    }
+    
+    public boolean isCorrect(int val, char ch) {
+        return (ch == this.getCode(val)) ;
     }
 
 }
