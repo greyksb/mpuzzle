@@ -32,5 +32,12 @@ public class Enigma {
     public boolean isCorrect(int val, char ch) {
         return (ch == this.getCode(val)) ;
     }
+    
+    public boolean isEnigmaChar(char ch) {
+        boolean out = false ;
+        for (int i=0; i<cipher.length; i++)
+            if (out = (cipher[i] == ch)) break ;
+        return out ;
+    }
 
 }

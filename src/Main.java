@@ -48,7 +48,7 @@ public class Main {
             if (read_char_mode) {
                 inputChar = inputStr.toUpperCase().charAt(0) ;
                 if (inputChar == 'Q') break ;
-                  if (isEnigmaChar(inputChar))
+                  if (tst.enigma.isEnigmaChar(inputChar))
                         if (tst.charIsPresent(inputChar) && tst.charIsUnsolved(inputChar)) {
                             last_line = "Your try: "+inputChar+" = " ;
                             read_char_mode = false ;
@@ -88,24 +88,6 @@ public class Main {
             }
         }
         cli_col.clearConsole();
-    }
-
-    public static boolean isEnigmaChar(char ch) {
-        boolean out = false ;
-        switch (ch) {
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-            case 'G':
-            case 'H':
-            case 'I':
-            case 'J':
-                    out = true ;
-        }
-        return out ;
     }
 }
 
