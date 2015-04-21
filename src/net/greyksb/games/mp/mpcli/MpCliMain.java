@@ -1,12 +1,22 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package net.greyksb.games.mp.mpcli;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import net.greyksb.games.mp.*;
+import net.greyksb.games.mp.Test;
 import net.greyksb.utils.cli.CliColors;
 
-public class Main {
-
-    public static void main(String[] args) throws IOException {
+/**
+ *
+ * @author greyksb(ksb)
+ */
+public class MpCliMain {
+  public static void main(String[] args) throws IOException {
 
         int  numberOfAllErrors = 0 ;
         int numberErrors = 0 ;
@@ -88,6 +98,5 @@ public class Main {
             }
         }
         cli_col.clearConsole();
-    }
+    }    
 }
-
