@@ -27,11 +27,11 @@ public class Test {
         //Enigma enigma = new Enigma() ;
         String tmpbuff = Integer.toString(value) ;
         int tmpInt ;
-        for (int i=0; i<n.cell.length; i++) {
+        for (int i=0; i<n.cells.length; i++) {
             tmpInt = Character.getNumericValue(tmpbuff.charAt(i)) ;
-            n.cell[i].setValue(tmpInt);
-            n.cell[i].setCode(enigma.getCode(tmpInt));
-            n.cell[i].setStatus(CellStatus.UNSOLVED);
+            n.cells[i].setValue(tmpInt);
+            n.cells[i].setCode(enigma.getCode(tmpInt));
+            n.cells[i].setStatus(CellStatus.UNSOLVED);
         }
 
     }
@@ -97,21 +97,22 @@ public class Test {
         setNuneric(this.summSecond, s2);
         setNuneric(this.result, r);
 
-        for (int i = 0; i < multFirst.cell.length ; i++) {
-            this.setFlagUnsolvedValue(multFirst.cell[i].getValue());
-        }
-        for (int i = 0; i < multSecond.cell.length ; i++) {
-            this.setFlagUnsolvedValue(multSecond.cell[i].getValue());
-        }
-        for (int i = 0; i < summFirst.cell.length ; i++) {
-            this.setFlagUnsolvedValue(summFirst.cell[i].getValue());
-        }
-        for (int i = 0; i < summSecond.cell.length ; i++) {
-            this.setFlagUnsolvedValue(summSecond.cell[i].getValue());
-        }
-        for (int i = 0; i < result.cell.length ; i++) {
-            this.setFlagUnsolvedValue(result.cell[i].getValue());
-        }
+        // все ячейки всех элементов задачи устанавливаем в unsolved
+        for (int i = 0; i < multFirst.cells.length ; i++) 
+            this.setFlagUnsolvedValue(multFirst.cells[i].getValue());
+        
+        for (int i = 0; i < multSecond.cells.length ; i++) 
+            this.setFlagUnsolvedValue(multSecond.cells[i].getValue());
+        
+        for (int i = 0; i < summFirst.cells.length ; i++) 
+            this.setFlagUnsolvedValue(summFirst.cells[i].getValue());
+        
+        for (int i = 0; i < summSecond.cells.length ; i++) 
+            this.setFlagUnsolvedValue(summSecond.cells[i].getValue());
+        
+        for (int i = 0; i < result.cells.length ; i++) 
+            this.setFlagUnsolvedValue(result.cells[i].getValue());
+        
 
 
 

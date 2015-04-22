@@ -44,11 +44,11 @@ public class Cell {
     public void setStatus(CellStatus status) {
         this.status = status;
     }
-
+/*
     boolean attemptValue(int test) {
         return (test==this.value) ; //? true : false ;
     }
-
+*/
     public String getCell() {
         String tmpBuff = "" ;
         if (status == CellStatus.UNSOLVED)

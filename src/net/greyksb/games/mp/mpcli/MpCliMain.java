@@ -23,23 +23,18 @@ public class MpCliMain {
         int numberGames = 0 ;
         double avgErrors = 0.00 ;
         boolean read_char_mode = true ;
-        //boolean last_line_mode = true ;
+        boolean new_game_flag = true ;
+        boolean last_print_flag = false ;
         String last_line = "Type q for exit or select character:" ;
         char inputChar = 'q' ;
         int inputInt = 0 ;
         String inputStr = "" ;
 
-        //Enigma enigma = new Enigma() ;
-
         CliColors cli_col = CliColors.DEFAULT;
-        //Scanner sc = new Scanner(System.in);
 
         BufferedReader brd = new BufferedReader(new InputStreamReader(System.in)) ;
-        //brd.read()
 
         Test tst = new Test();
-        tst.newTest();
-        //sizOfTest = tst.getUnsolvedValue() ;
 
         while (true) {
             cli_col.clearConsole();
@@ -50,10 +45,28 @@ public class MpCliMain {
             System.out.println("Average number of errors:\t" + cli_col.getColorString(CliColors.FC_YELLOW) + avgErrors);
             cli_col.setDefaultColor();
             System.out.println("\nTest for You:\n");
+            
+            if (last_print_flag) {
+                tst.printTest();
+                last_print_flag = false ;
+                System.out.println("");
+                System.out.print(last_line);
+                inputStr = brd.readLine() ;
+                last_line = "New game...Type q for exit or select character:" ;
+                continue;
+            }
+            
+            if (new_game_flag) {
+                System.gc();
+                tst.newTest();
+                new_game_flag = false;
+            }
+            
             tst.printTest();
             System.out.println("");
             System.out.print(last_line);
             inputStr = brd.readLine() ;
+            
             if (inputStr.length() != 1) continue;
             if (read_char_mode) {
                 inputChar = inputStr.toUpperCase().charAt(0) ;
@@ -77,17 +90,17 @@ public class MpCliMain {
                        last_line = cli_col.getColorString(CliColors.FC_YELLOW)+"Yes! " + inputChar + " is " + inputInt +cli_col.getColorString(CliColors.DEFAULT)+ " Select next character:";
                        tst.changeCellStatus(inputInt);
                        tst.setFlagSolvedValue(inputInt);
-                       //sizOfTest -= 1 ;
                        read_char_mode = true ;
                        if ( tst.getUnsolvedValue() == 0) {
-                           // new game
+                           // game over
                            numberGames += 1 ;
                            numberOfAllErrors += numberErrors ;
                            numberErrors = 0 ;
                            avgErrors = numberOfAllErrors / numberGames ;
-                           tst.newTest();
-                           //sizOfTest = tst.getUnsolvedValue() ;
-                           last_line = "New game...Type q for exit or select character:" ;
+                           new_game_flag = true ;
+                           last_print_flag = true ;
+                           last_line = "Game over...Press any key for continue..." ;
+                           
                        }
                    }
                    else {
