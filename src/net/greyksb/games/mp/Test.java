@@ -152,12 +152,12 @@ public class Test {
         return out ;
     }
 
-    public void changeCellStatus(int val) {
-        multFirst.changeCellsStatus(val);
-        multSecond.changeCellsStatus(val);
-        summFirst.changeCellsStatus(val);
-        summSecond.changeCellsStatus(val);
-        result.changeCellsStatus(val);
+    public void changeCellStatus(int val, CellStatus cs) {
+        multFirst.changeCellsStatus(val, cs);
+        multSecond.changeCellsStatus(val, cs);
+        summFirst.changeCellsStatus(val, cs);
+        summSecond.changeCellsStatus(val, cs);
+        result.changeCellsStatus(val, cs);
     }
 
 

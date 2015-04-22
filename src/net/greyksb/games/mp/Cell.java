@@ -66,10 +66,16 @@ public class Cell {
             tmpBuff += Character.toString(getCode());
             tmpBuff += CliColors.getColorString(CliColors.DEFAULT) ;
         }
-        else {
+        else if (status == CellStatus.SOLVED){
             tmpBuff += CliColors.getColorString(CliColors.FC_GREEN) ;
             tmpBuff += Integer.toString(getValue());
             tmpBuff += CliColors.getColorString(CliColors.DEFAULT) ;
+        }
+        else {
+            tmpBuff += CliColors.getColorString(CliColors.FC_BLUE) ;
+            tmpBuff += Integer.toString(getValue());
+            tmpBuff += CliColors.getColorString(CliColors.DEFAULT) ;
+            
         }
         return tmpBuff ;
     }

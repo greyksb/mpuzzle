@@ -16,9 +16,9 @@ public class Numeric {
     }
 
     // изменить статус тех ячеек, значение которых равно value
-    public void changeCellsStatus(int value) {
+    public void changeCellsStatus(int value, CellStatus cs) {
         for (Cell aCell : this.cells) {
-            if (aCell.getValue() == value) aCell.setStatus(CellStatus.SOLVED);
+            if (aCell.getValue() == value) aCell.setStatus(cs);
         }
 
     }
