@@ -14,7 +14,7 @@ import net.greyksb.games.mp.TestChecker;
 import net.greyksb.utils.cli.CliColors;
 
 /**
- *
+ * Модель головоломки в режиме командная строка
  * @author greyksb(ksb)
  */
 public class MpCliMain {
