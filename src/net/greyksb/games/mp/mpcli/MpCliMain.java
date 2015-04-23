@@ -103,7 +103,7 @@ public class MpCliMain {
                        // например, если известны оба множителя, то задание надо считать 
                        // выполненым...
                        
-                       tc.checkAll();
+                       tc.checkMultipliers();
                        
                        read_char_mode = true ;
                        if ( tst.getUnsolvedValue() == 0) {

@@ -42,9 +42,44 @@ public class TestChecker {
         return out ;
     }
     
-    public void checkAll() {
+    public void checkMultipliers() {
         if (isM1solved()) {
-            if (isM2solved()) {
+            // первый множитель известен... теперь выполним доп. проверки в 
+            // такой последовательности:
+            //      - известен ли младший разряд второго множителя
+            //      - известен ли старший разряд второго множителя
+            //      
+            //      и после этого проверяем известен ли второй множитель полностью, т.к.
+            //      возможны ситуации, что один из разрядов раскроется в ходе
+            //      предыдущих проверок и, соответственно, коррекции статуса
+            //      разрядов в первом и втором слагаемых
+            //
+            //      такой алгоритм проще рекурсивного...
+            
+            if (test.multSecond.cells[1].getStatus() != CellStatus.UNSOLVED) {
+                // во втором множителе известна младшая ячейка  
+                // обрабатываем первое слагаемое
+                for (int i=0; i<4; i++) {
+                    if (test.summFirst.cells[i].getStatus() == CellStatus.UNSOLVED) {
+                        test.summFirst.cells[i].setStatus(CellStatus.CALCULATED) ;
+                        test.changeCellStatus(test.summFirst.cells[i].getValue(), CellStatus.CALCULATED);
+                        test.setFlagSolvedValue(test.summFirst.cells[i].getValue());
+                    }
+                }
+            }
+            if (test.multSecond.cells[0].getStatus() != CellStatus.UNSOLVED){
+                // во втором множителе известна старшая ячейка  
+                // обрабатываем второе слагаемое
+                for (int i=0; i<4; i++) {
+                    if (test.summSecond.cells[i].getStatus() == CellStatus.UNSOLVED) {
+                        test.summSecond.cells[i].setStatus(CellStatus.CALCULATED) ;
+                        test.changeCellStatus(test.summSecond.cells[i].getValue(), CellStatus.CALCULATED);
+                        test.setFlagSolvedValue(test.summSecond.cells[i].getValue());
+                    }
+                }
+                
+            }
+                        if (isM2solved()) {
                 // известны оба множителя...  игру надо считать законченной
                 
                 // обрабатываем первое слагаемое
@@ -74,30 +109,7 @@ public class TestChecker {
                     }
                 }
             }
-            
-            else if (test.multSecond.cells[1].getStatus() != CellStatus.UNSOLVED) {
-                // во втором множителе известна младшая ячейка  
-                // обрабатываем первое слагаемое
-                for (int i=0; i<4; i++) {
-                    if (test.summFirst.cells[i].getStatus() == CellStatus.UNSOLVED) {
-                        test.summFirst.cells[i].setStatus(CellStatus.CALCULATED) ;
-                        test.changeCellStatus(test.summFirst.cells[i].getValue(), CellStatus.CALCULATED);
-                        test.setFlagSolvedValue(test.summFirst.cells[i].getValue());
-                    }
-                }
-            }
-            else if (test.multSecond.cells[0].getStatus() != CellStatus.UNSOLVED){
-                // во втором множителе известна старшая ячейка  
-                // обрабатываем второе слагаемое
-                for (int i=0; i<4; i++) {
-                    if (test.summSecond.cells[i].getStatus() == CellStatus.UNSOLVED) {
-                        test.summSecond.cells[i].setStatus(CellStatus.CALCULATED) ;
-                        test.changeCellStatus(test.summSecond.cells[i].getValue(), CellStatus.CALCULATED);
-                        test.setFlagSolvedValue(test.summSecond.cells[i].getValue());
-                    }
-                }
-                
-            }
+
         }
     }
     
