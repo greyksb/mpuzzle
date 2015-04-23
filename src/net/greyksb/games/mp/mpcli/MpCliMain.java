@@ -16,6 +16,7 @@ import net.greyksb.utils.cli.CliColors;
 /**
  * Модель головоломки в режиме командная строка
  * @author greyksb(ksb)
+ * @date 04.2015
  */
 public class MpCliMain {
   public static void main(String[] args) throws IOException {
