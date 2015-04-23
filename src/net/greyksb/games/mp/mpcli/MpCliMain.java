@@ -114,7 +114,7 @@ public class MpCliMain {
                            avgErrors = (double)numberOfAllErrors / (double)numberGames ;
                            new_game_flag = true ;
                            last_print_flag = true ;
-                           last_line = "Game over...Press any key for continue..." ;
+                           last_line = "Game over...Press any key to continue..." ;
                            
                        }
                     }
