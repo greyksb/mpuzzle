@@ -48,7 +48,7 @@ public class MpCliMain {
             cli_col.setDefaultColor();
             System.out.println("Number of complited games:\t" + cli_col.getColorString(CliColors.FC_YELLOW) + numberGames);
             cli_col.setDefaultColor();
-            System.out.printf("Average number of errors:\t%s%.2f",cli_col.getColorString(CliColors.FC_YELLOW),avgErrors);
+            System.out.println("Average number of errors:\t" + cli_col.getColorString(CliColors.FC_YELLOW) + avgErrors);
             cli_col.setDefaultColor();
             System.out.println("\nTest for You:\n");
             
@@ -111,10 +111,10 @@ public class MpCliMain {
                            numberGames += 1 ;
                            numberOfAllErrors += numberErrors ;
                            numberErrors = 0 ;
-                           avgErrors = (double)numberOfAllErrors / (double)numberGames ;
+                           avgErrors = numberOfAllErrors / numberGames ;
                            new_game_flag = true ;
                            last_print_flag = true ;
-                           last_line = "Game over...Press any key to continue..." ;
+                           last_line = "Game over...Press any key for continue..." ;
                            
                        }
                     }
